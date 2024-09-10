@@ -32,12 +32,12 @@ class TestMoney:
         money_sum = adder.add(money1, money2)
         assert money_sum.amount == 8
 
-    def test__4usd_and_2eur_equals8usd_mock(self, mocker):
+    def test__4usd_and_2eur_equals10usd_mock(self, mocker):
         money1 = Money(4, CurrencyType.USD)
         money2 = Money(2, CurrencyType.EUR)
 
-        mocker.patch('money.exchange_service.ExchangeService.convert', return_value=4)
+        mocker.patch('money.exchange_service.ExchangeService.convert', return_value=6)
         exchange_service = ExchangeService()
         adder = MoneyAdder(exchange_service)
         money_sum = adder.add(money1, money2)
-        assert money_sum.amount == 8
+        assert money_sum.amount == 10
